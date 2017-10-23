@@ -1,5 +1,5 @@
 {
-	"name": "mark-hewitt/google-authenticator",
+	"name": "mrhewitt/GoogleAuthenticationProvider",
 	"description": "Silex service provider for ",
 	"type": "silex-service",
 	"version": "1.0",
