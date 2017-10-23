@@ -1,0 +1,26 @@
+{
+	"name": "mark-hewitt/google-authenticator",
+	"description": "Silex service provider for ",
+	"type": "silex-service",
+	"version": "1.0",
+	"keywords": ["silex", "auth", "two-factor", "google authenticator", "twofactorauth"],
+	"homepage": "http://github.com/mrhewitt/GoogleAuthenticationProvider",
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Mark Hewiit",
+			"homepage": "http://www.markhewitt.co.za",
+			"role": "Developer"
+		}
+	],
+	"require": {
+		"php": ">=5.6.0",
+        "silex/silex": "~2.0",
+		"robthree/twofactorauth": "^1.4"
+	},
+	"autoload": {
+		"psr-4": {
+			"MarkHewitt\\GoogleAuthenticator\\": "src"
+		}
+	},
+}
