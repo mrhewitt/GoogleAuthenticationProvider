@@ -1,6 +1,7 @@
 <?php
 
 namespace MarkHewitt\GoogleAuthentication;
+
 use RobThree;
 use MarkHewitt\GoogleAuthentication\QRProvider as QRProvider;
 
