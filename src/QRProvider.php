@@ -1,25 +1,26 @@
 <?php
-require_once '../../phpqrcode.php';                 // Yeah, we're gonna need that
 
 namespace MarkHewitt\GoogleAuthentication;
+use Endroid\QrCode\QrCode;
+use RobThree\Auth\Providers\Qr\IQRCodeProvider;
 
 /**
  *
  */
 class QRProvider implements IQRCodeProvider {
 
+	/**
+	 * This is slightly different, it returns the image as a base64 encoded data URI
+	 * to allow direct embedding into img tags, avoiding multiple round trips to server
+	 */
 	public function getMimeType() {
-		return 'image/png';                             // This provider only returns PNG's
+		return 'image/png';                            
 	}
 
-	public function getQRCodeImage($qrtext, $size) {
-		ob_start();                                     // 'Catch' QRCode's output
-		QRCode::png($qrtext, null, QR_ECLEVEL_L, 3, 4); // We ignore $size and set it to 3
-														// since phpqrcode doesn't support
-														// a size in pixels...
-		$result = ob_get_contents();                    // 'Catch' QRCode's output
-		ob_end_clean();                                 // Cleanup
-		return $result;                                 // Return image
+	public function getQRCodeImage($secret, $size) {
+		$qrCode = new QrCode($secret);
+		$qrCode->setSize(300);
+		return (string)$qrCode->getImage();
 	}
 
 }
