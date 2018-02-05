@@ -7,13 +7,13 @@ use MarkHewitt\GoogleAuthentication\QRProvider as QRProvider;
 
 class GoogleAuthenticator {
 
-	protected $tfa = null;
+	public $tfa = null;
 	protected $qr = null;
 	protected $app_name = "";
 
 	public function __construct($app_name) {
 	//	$this->qr = new QRProvider();
-		$this->tfa = new RobThree\Auth\TwoFactorAuth($app_name, 6, 60, 'sha1'/*, $this->qr*/);	
+		$this->tfa = new RobThree\Auth\TwoFactorAuth($app_name); //, 6, 60, 'sha1'/*, $this->qr*/);	
 		$this->app_name = $app_name;
 	}
 
@@ -37,7 +37,7 @@ class GoogleAuthenticator {
 	 * @return array 
 	 */
 	public function generate( $secret = false, $label = "" ) {
-		if ( empty($secret) ) { $secret = $this->tfa->createSecret(); }
+		if ( empty($secret) ) { $secret = $this->tfa->createSecret(160); }
 		$qr = $this->getQR($secret, $label);
 		return ['secret' => $secret, 'qr' => $qr];
 	}
@@ -61,7 +61,7 @@ class GoogleAuthenticator {
 	public function getQR($secret, $label = "") {
 		return $this->tfa->getQRCodeImageAsDataUri($label, $secret);
 	}
-	
+
 	public function validate($secret, $code) {
 		return $this->tfa->verifyCode($secret, $code);
 	}
